@@ -66,36 +66,36 @@ Returning an appropriate tuple is not documented. The post-auth function needs t
 
 The second tuple contains the key-value pairs are inserted into the RADIUS response packet. For example, an entire response might look like:
 
-{% highlight bash %}
+```bash
 (radiusd.RLM_MODULE_UPDATED, 
 ( ('Tunnel-Private-Group-Id', 92),
   ('Tunnel-Type', 'VLAN'),
   ('Tunnel-Medium-Type', 'IEEE-802')
 ),
 ('Post-Auth-Type', 'python')
-{% endhighlight %}
+```
 
 I wanted other members of the team to be able to troubleshoot problems with RADIUS, LDAP and VLAN assignment, so I added some troubleshooting to the module. I did this by also making the module callable from the commandline. Examples:
 
 To show the VLAN that will be assigned to a user / mac address pair:
-{% highlight bash %}
+```bash
 ldap2vlan username mac-address
-{% endhighlight %}
+```
 
 To show the VLAN-enabled groups that a user belongs to:
-{% highlight bash %}
+```bash
 ldap2vlan username
-{% endhighlight %}
+```
 
 Show all groups in LDAP that provide VLAN information, sorted:
-{% highlight bash %}
+```bash
 ldap2vlan
-{% endhighlight %}
+```
 
 ## FreeRADIUS configuration
 
 In <strong> /etc/raddb/modules/python</strong>:
-{% highlight bash %}
+```bash
 python {
 	mod_instantiate = "ldap2vlan"
 	func_instantiate = "instantiate"
@@ -106,19 +106,20 @@ python {
 	mod_detach = "ldap2vlan"
 	func_detach = "detach"
 }
-{% endhighlight %}
+```
 
 In */etc/raddb/sites-available/default*, change the post-auth section to be:
 
+```bash
 {% highlight bash %}
 post-auth {
 	python
 }
-{% endhighlight %}
+```
 
 Put the following into */usr/lib64/python2.6/site-packages/radiusd.py*
 
-{% highlight bash %}
+```bash
 #
 # Definitions for RADIUS programs
 #
@@ -159,6 +160,6 @@ def radlog(level, msg):
     sys.stdout.write(msg + 'n')
 
     level = level
-{% endhighlight %}
+```
 
 A better file is supposed to be generated when FreeRADIUS is built. This doesn't happen, but I found that the test file works fine.
