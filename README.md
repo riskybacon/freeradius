@@ -108,7 +108,6 @@ python {
 In */etc/raddb/sites-available/default*, change the post-auth section to be:
 
 ```bash
-{% highlight bash %}
 post-auth {
 	python
 }
