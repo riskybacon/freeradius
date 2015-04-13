@@ -1,7 +1,4 @@
----
-layout: post
-title: FreeRADIUS Python VLAN Module
----
+#  FreeRADIUS Python VLAN Module
 
 This is a FreeRADIUS module written in Python for assigning VLANs to devices connecting to a wireless network. Source is available at [https://github.com/riskybacon/freeradius](https://github.com/riskybacon/freeradius)
 
