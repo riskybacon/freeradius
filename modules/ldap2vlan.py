@@ -291,7 +291,7 @@ def groupSortKey(group):
 #-------------------------------------------------------------------------------
 def hosts(con, mac):
   '''Return set of LDAP entries in ou=Hosts that have this mac address'''
-  hostSearchFilter='(&(x-nmc-macToIp=' + mac + '))'
+  hostSearchFilter='(&(x-nmc-macToIp=' + mac + '*))'
   return search(con, hostDN, hostSearchFilter)
 
 #-------------------------------------------------------------------------------
